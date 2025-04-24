@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Bhargo",
+    "gender": "Male",
+    "city": "Nadiad",
+    "email": "bhargav18@gmail.com",
+    "mobno": "8347088364"
+  },
+  {
+    "id": 1,
+    "name": "nanu",
+    "gender": "male",
+    "city": "anand",
+    "email": "nand@yahoo.com",
+    "mobno": "1234567890"
+  },
+  {
+    "id": 3,
+    "name": "name",
+    "gender": "name",
+    "city": "name",
+    "email": "name@gmail.com",
+    "mobno": "1246579"
+  },
+  {
+    "id": 4,
+    "name": "nidhi",
+    "gender": "female",
+    "city": "nid",
+    "email": "nid@gmail.com",
+    "mobno": "1234567855"
+  },
+  {
+    "id": 5,
+    "name": "demo",
+    "gender": "Male",
+    "city": "nad",
+    "email": "demo",
+    "mobno": "123"
+  },
+  {
+    "id": 6,
+    "name": "sinchan",
+    "gender": "male",
+    "city": "kasukabe",
+    "email": "sichanyo@gmail.com",
+    "mobno": "9999999999"
+  }
+]
