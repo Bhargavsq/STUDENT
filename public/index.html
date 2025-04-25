@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<!-- <body>
     <center>
         <form id="userForm">
             <input type="hidden" id="idHidden" name="idHidden">
@@ -99,4 +99,98 @@
     <hr>
 </body>
 
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Form</title>
+  <style>
+    table, td, th { border: 1px solid #000; border-collapse: collapse; padding: 8px; }
+    .content-table { margin: auto; }
+  </style>
+</head> -->
+<body>
+  <center>
+    <form id="userForm">
+      <input type="hidden" id="idHidden">
+      <table class="content-table">
+        <tr><th colspan="2">Student Data</th></tr>
+        <tr><td>Name</td><td><input type="text" id="txtName" required></td></tr>
+        <tr><td>Gender</td><td><input type="text" id="txtGender" required></td></tr>
+        <tr><td>City</td><td><input type="text" id="txtCity" required></td></tr>
+        <tr><td>Email</td><td><input type="email" id="txtEmail" required></td></tr>
+        <tr><td>Mobile</td><td><input type="number" id="txtMobno" required></td></tr>
+        <tr><td colspan="2" align="center"><input type="submit" value="Submit"></td></tr>
+      </table>
+    </form>
+  </center>
+
+  <h3 align="center">User Data</h3>
+  <hr>
+  <ol id="userList"></ol>
+
+  <script>
+    const API = 'http://localhost:3000/users'; // change this to your deployed API if needed
+
+    async function fetchUsers() {
+      const res = await fetch(API);
+      const users = await res.json();
+      const userList = document.getElementById('userList');
+      userList.innerHTML = '';
+      users.forEach(user => {
+        const li = document.createElement('li');
+        li.textContent = `Name:${user.name}, Gender:${user.gender}, City: ${user.city}, Email: ${user.email}, Mobno: ${user.mobno}`;
+        li.innerHTML += ` <button onclick="editUser(${user.id})">Edit</button> <button onclick="deleteUser(${user.id})">Delete</button>`;
+        userList.appendChild(li);
+      });
+    }
+
+    async function deleteUser(id) {
+      await fetch(`${API}/${id}`, { method: 'DELETE' });
+      fetchUsers();
+    }
+
+    async function editUser(id) {
+      const res = await fetch(`${API}/${id}`);
+      const user = await res.json();
+      document.getElementById('idHidden').value = user.id;
+      document.getElementById('txtName').value = user.name;
+      document.getElementById('txtGender').value = user.gender;
+      document.getElementById('txtCity').value = user.city;
+      document.getElementById('txtEmail').value = user.email;
+      document.getElementById('txtMobno').value = user.mobno;
+    }
+
+    async function submitForm(event) {
+      event.preventDefault();
+      const id = document.getElementById('idHidden').value;
+      const user = {
+        name: document.getElementById('txtName').value,
+        gender: document.getElementById('txtGender').value,
+        city: document.getElementById('txtCity').value,
+        email: document.getElementById('txtEmail').value,
+        mobno: document.getElementById('txtMobno').value,
+      };
+
+      const method = id ? 'PUT' : 'POST';
+      const url = id ? `${API}/${id}` : API;
+
+      await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      });
+
+      document.getElementById('userForm').reset();
+      document.getElementById('idHidden').value = '';
+      fetchUsers();
+    }
+
+    document.getElementById('userForm').addEventListener('submit', submitForm);
+    fetchUsers();
+  </script>
+</body>
 </html>
